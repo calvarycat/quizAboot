@@ -1,0 +1,256 @@
+{
+  "provices": [
+    {
+      "Ma": "1",
+      "TenTinhThanh": " An Giang"
+    },
+    {
+      "Ma": "2",
+      "TenTinhThanh": " Bà Rịa - Vũng Tàu"
+    },
+    {
+      "Ma": "3",
+      "TenTinhThanh": " Bắc Giang"
+    },
+    {
+      "Ma": "4",
+      "TenTinhThanh": " Bắc Kạn"
+    },
+    {
+      "Ma": "5",
+      "TenTinhThanh": " Bạc Liêu"
+    },
+    {
+      "Ma": "6",
+      "TenTinhThanh": " Bắc Ninh"
+    },
+    {
+      "Ma": "7",
+      "TenTinhThanh": " Bến Tre"
+    },
+    {
+      "Ma": "8",
+      "TenTinhThanh": " Bình Định"
+    },
+    {
+      "Ma": "9",
+      "TenTinhThanh": " Bình Dương"
+    },
+    {
+      "Ma": "10",
+      "TenTinhThanh": " Bình Phước"
+    },
+    {
+      "Ma": "11",
+      "TenTinhThanh": " Bình Thuận"
+    },
+    {
+      "Ma": "12",
+      "TenTinhThanh": " Cà Mau"
+    },
+    {
+      "Ma": "13",
+      "TenTinhThanh": " Cao Bằng"
+    },
+    {
+      "Ma": "14",
+      "TenTinhThanh": " Đắk Lắk"
+    },
+    {
+      "Ma": "15",
+      "TenTinhThanh": " Đắk Nông"
+    },
+    {
+      "Ma": "16",
+      "TenTinhThanh": " Điện Biên"
+    },
+    {
+      "Ma": "17",
+      "TenTinhThanh": " Đồng Nai"
+    },
+    {
+      "Ma": "18",
+      "TenTinhThanh": " Đồng Tháp"
+    },
+    {
+      "Ma": "19",
+      "TenTinhThanh": " Gia Lai"
+    },
+    {
+      "Ma": "20",
+      "TenTinhThanh": " Hà Giang"
+    },
+    {
+      "Ma": "21",
+      "TenTinhThanh": " Hà Nam"
+    },
+    {
+      "Ma": "22",
+      "TenTinhThanh": " Hà Tĩnh"
+    },
+    {
+      "Ma": "23",
+      "TenTinhThanh": " Hải Dương"
+    },
+    {
+      "Ma": "24",
+      "TenTinhThanh": " Hậu Giang"
+    },
+    {
+      "Ma": "25",
+      "TenTinhThanh": " Hoà Bình"
+    },
+    {
+      "Ma": "26",
+      "TenTinhThanh": " Hưng Yên"
+    },
+    {
+      "Ma": "27",
+      "TenTinhThanh": " Khánh Hoà"
+    },
+    {
+      "Ma": "28",
+      "TenTinhThanh": " Kiên Giang"
+    },
+    {
+      "Ma": "29",
+      "TenTinhThanh": " Kon Tum"
+    },
+    {
+      "Ma": "30",
+      "TenTinhThanh": " Lai Châu"
+    },
+    {
+      "Ma": "31",
+      "TenTinhThanh": " Lâm Đồng"
+    },
+    {
+      "Ma": "32",
+      "TenTinhThanh": " Lạng Sơn"
+    },
+    {
+      "Ma": "33",
+      "TenTinhThanh": " Lào Cai"
+    },
+    {
+      "Ma": "34",
+      "TenTinhThanh": " Long An"
+    },
+    {
+      "Ma": "35",
+      "TenTinhThanh": " Nam Định"
+    },
+    {
+      "Ma": "36",
+      "TenTinhThanh": " Nghệ An"
+    },
+    {
+      "Ma": "37",
+      "TenTinhThanh": " Ninh Bình"
+    },
+    {
+      "Ma": "38",
+      "TenTinhThanh": " Ninh Thuận"
+    },
+    {
+      "Ma": "39",
+      "TenTinhThanh": " Phú Thọ"
+    },
+    {
+      "Ma": "40",
+      "TenTinhThanh": " Phú Yên"
+    },
+    {
+      "Ma": "41",
+      "TenTinhThanh": " Quảng Bình"
+    },
+    {
+      "Ma": "42",
+      "TenTinhThanh": " Quảng Nam"
+    },
+    {
+      "Ma": "43",
+      "TenTinhThanh": " Quảng Ngãi"
+    },
+    {
+      "Ma": "44",
+      "TenTinhThanh": " Quảng Ninh"
+    },
+    {
+      "Ma": "45",
+      "TenTinhThanh": " Quảng Trị"
+    },
+    {
+      "Ma": "46",
+      "TenTinhThanh": " Sóc Trăng"
+    },
+    {
+      "Ma": "47",
+      "TenTinhThanh": " Sơn La"
+    },
+    {
+      "Ma": "48",
+      "TenTinhThanh": " Tây Ninh"
+    },
+    {
+      "Ma": "49",
+      "TenTinhThanh": " Thái Bình"
+    },
+    {
+      "Ma": "50",
+      "TenTinhThanh": " Thái Nguyên"
+    },
+    {
+      "Ma": "51",
+      "TenTinhThanh": " Thanh Hoá"
+    },
+    {
+      "Ma": "52",
+      "TenTinhThanh": " Thừa Thiên Huế"
+    },
+    {
+      "Ma": "53",
+      "TenTinhThanh": " Tiền Giang"
+    },
+    {
+      "Ma": "54",
+      "TenTinhThanh": " Trà Vinh"
+    },
+    {
+      "Ma": "55",
+      "TenTinhThanh": " Tuyên Quang"
+    },
+    {
+      "Ma": "56",
+      "TenTinhThanh": " Vĩnh Long"
+    },
+    {
+      "Ma": "57",
+      "TenTinhThanh": " Vĩnh Phúc"
+    },
+    {
+      "Ma": "58",
+      "TenTinhThanh": " Yên Bái"
+    },
+    {
+      "Ma": "59",
+      "TenTinhThanh": "Tp Cần Thơ"
+    },
+    {
+      "Ma": "60",
+      "TenTinhThanh": "Tp Đà Nẵng"
+    },
+    {
+      "Ma": "61",
+      "TenTinhThanh": "Tp Hà Nội"
+    },
+    {
+      "Ma": "62",
+      "TenTinhThanh": "Tp Hải Phòng"
+    },
+    {
+      "Ma": "63",
+      "TenTinhThanh": "Tp Hồ Chí Minh"
+    }
+  ]
+}
