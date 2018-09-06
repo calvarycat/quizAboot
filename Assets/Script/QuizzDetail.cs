@@ -199,15 +199,19 @@ public class QuizzDetail : MonoBehaviour
         {
             // StartCoroutine(GotoNextLevel());
             listGenerate[currentSelectQuizz].isCorrect = true;
-            PopUpmanager.instance.InitExplain(quizz.hints[0], null);
+            PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
             Debug.Log("finish quest rồi");
             SHowMedal();
         }
-        if(CheckFinishRound1())
+      
+    }
+    public void OnCloseExplain()
+    {
+        if (CheckFinishRound1())
         {
             string mes = "Chuc mung ban da thu thap dduowc du 8 huy hieu B-Nobel. Hayx tieep tuc chinh phuc thu thach tiep nao";
             PopUpmanager.instance.InitFinishRound1(mes, NextRound);
-         
+
         }
     }
     public void NextRound()

@@ -13,10 +13,9 @@ public class AppControl : MonoBehaviour
     // Use this for initialization
     public void Awake()
     {
-        instance = this;
-        //  listResult.deviceID = SystemInfo.deviceUniqueIdentifier;
+        instance = this;      
         GetFakeData();
-        SendData();
+        //SendData();
     }
 
     public void SendData()

@@ -64,7 +64,7 @@ public class PNInfor : MonoBehaviour
 
     public void OnDangNhapAM()
     {
-        // check thong tin khac null dax
+        AudioManager.instance.PlayButtonClick();
         if (CheckAMInfor())
         {
             PopUpmanager.instance.InitInfor("Check information",null);
@@ -91,20 +91,23 @@ public class PNInfor : MonoBehaviour
         isBacsi = true;
         BacSi.SetActive(true);
         DuocSi.SetActive(false);
+        AudioManager.instance.PlayButtonClick();
     }
     public void OnDuocSiClick()
     {
         isBacsi = false;
         BacSi.SetActive(false);
         DuocSi.SetActive(true);
+        AudioManager.instance.PlayButtonClick();
     }
     
 
 
     public void OnDangNhapStartGame()
     {
+        AudioManager.instance.PlayButtonClick();
         // check thong tin khac null dax
-        if(isBacsi)
+        if (isBacsi)
         {
             if (CheckThongTinBacSi())
             {
@@ -149,6 +152,7 @@ public class PNInfor : MonoBehaviour
 
     public void OnInforClick()
     {
+        AudioManager.instance.PlayButtonClick();
         txtNameChangeInfor.text = AppControl.instance.sentResult.trinhDuocVienName;
         pnChangeInfor.SetActive(true);
     }

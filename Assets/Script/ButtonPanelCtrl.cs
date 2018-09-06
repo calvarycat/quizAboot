@@ -25,7 +25,8 @@ public class ButtonPanelCtrl : MonoBehaviour
 	public void OnButtonPressed()
 	{
 
-		if(!QuizzDetail.instance.bFullAnswer){
+        AudioManager.instance.PlayButtonClick();
+        if (!QuizzDetail.instance.bFullAnswer){
             if(!bHide)
             {
                 HideButton();
@@ -69,16 +70,12 @@ public class ButtonPanelCtrl : MonoBehaviour
 	//Nos esperamos un frame para que el audio no suene con retraso
 	IEnumerator SetLetter()
 	{
-    //    Debug.Log("Set letter");
 		yield return null;
-		//QuizzDetail.instance.SetLetter(text.text, this);
         QuizzDetail.instance.SetLetter(text.text, idButton);
     }
     IEnumerator UnSetLetter()
     {
-      //  Debug.Log("Set unsetletter");
         yield return null;
-        //QuizzDetail.instance.SetLetter(text.text, this);
         QuizzDetail.instance.UnSetLetter(text.text, idButton);
     }
 

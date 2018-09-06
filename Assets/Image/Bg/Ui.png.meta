@@ -300,10 +300,10 @@ TextureImporter:
       name: Ui_13
       rect:
         serializedVersion: 2
-        x: 629
-        y: 743
-        width: 430
-        height: 85
+        x: 632
+        y: 746
+        width: 424
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 32, y: 16, z: 25, w: 14}
@@ -319,7 +319,7 @@ TextureImporter:
         width: 17
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
