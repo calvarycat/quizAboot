@@ -48,8 +48,7 @@ public class QuizzItem : MonoBehaviour
 
 
     public bool CheckQuizz(string text)
-    {
-        Debug.Log("zo day nua hủ");
+    {      
         if (text.Trim().ToUpper() == quiz.keyword.Trim().ToUpper())
         {
             return true;

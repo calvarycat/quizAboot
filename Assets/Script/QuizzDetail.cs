@@ -16,10 +16,6 @@ public class QuizzDetail : MonoBehaviour
     public Quizz quizz;
     public int QuizID;
     const int totalLettersPanel = 15;
-
-    List<int> randomNumbers1 = new List<int>() { 3, 11, 14, 5, 1, 8, 0, 2, 6, 12, 9, 4, 7, 10, 13 };
-    List<int> randomNumbers2 = new List<int>() { 8, 13, 9, 14, 1, 10, 0, 2, 5, 12, 6, 4, 7, 3, 11 };
-    List<int> randomNumbers3 = new List<int>() { 6, 10, 9, 14, 3, 13, 11, 2, 5, 0, 8, 4, 7, 1, 12 };
     List<List<int>> randomNumbers;
     int nextIndex = 0;                                  //Vamos numerando las letras de la respuesta para poder rellenarlas despues
     public bool bFullAnswer;                            //Se han rellenado todas las letras de la respuesta
@@ -27,7 +23,6 @@ public class QuizzDetail : MonoBehaviour
     public string currentLetter;
     [HideInInspector]
     public ButtonPanelCtrl currentButtonPanelCtrl;
-    List<ButtonLetterCtrl> listButtonLetterCtrl;        //Lista para recorrer y buscar posibles huecos
     List<ButtonPanelCtrl> listButtonPanelCtrl;			//Lista para recorrer y resolver letras
     public GameObject panelButtons;
     public GameObject buttonLetterAnswerPrefab;
@@ -39,15 +34,19 @@ public class QuizzDetail : MonoBehaviour
         instance = this;
     }
 
+    public void OnSHow(bool isShow)
+    {
+        Root.SetActive(isShow);
+    }
     public void OnInitQuiz(Quizz _quiz, int idQuiz)
     {
         currentSelectQuizz = idQuiz;
         txtHint.text = _quiz.hints[0];
+        quizz = _quiz;
         if (!listGenerate[idQuiz].isGenerate)
         {
             listGenerate[idQuiz].isGenerate = true;
-            Root.SetActive(true);
-            quizz = _quiz;
+            Root.SetActive(true);          
             Init();
         }
         else
@@ -111,9 +110,6 @@ public class QuizzDetail : MonoBehaviour
     {
 
         randomNumbers = new List<List<int>>();
-        randomNumbers.Add(randomNumbers1);
-        randomNumbers.Add(randomNumbers2);
-        randomNumbers.Add(randomNumbers3);
         currentAnswer = quizz.keyword.ToUpper();
         words = quizz.keyword.Split(' ');
         listGenerate[currentSelectQuizz].keyword = currentAnswer;
@@ -126,9 +122,7 @@ public class QuizzDetail : MonoBehaviour
         string cleanAnswer = currentAnswer.Replace(" ", "");
         cleanAnswer = cleanAnswer.Replace("&", "");
         cleanAnswer = cleanAnswer.Replace("-", "");
-
-       
-        List<int> positions = randomNumbers[Random.Range(0, 3)];
+        List<int> positions = Util.GetRandomNumberInList(15);
         for (int i = 0; i < cleanAnswer.Length; i++)
         {
             Button currentButton = panelButtons.transform.GetChild(positions[i]).GetComponent<Button>();
@@ -159,75 +153,63 @@ public class QuizzDetail : MonoBehaviour
         }
     }
 
-
-
-    public void SetLetter(string letter, ButtonPanelCtrl buttonPanelCtrl)
-    {
-        if (bFullAnswer)
-        {
-            return;
-        }
-        currentLetter = letter;
-        currentButtonPanelCtrl = buttonPanelCtrl;
-
-        if (OnLetterButtonPressed != null)
-        {
-            OnLetterButtonPressed();
-        }
-        if (CheckLevelIsFinished())
-        {
-            // StartCoroutine(GotoNextLevel());
-            Debug.Log("is finish");
-        }
-        else
-        {
-            SetNextIndex();
-        }
-    }
-
     public void SetLetter(string letter, int idButton)
     {
-
         if (listGenerate[currentSelectQuizz].isFullAnswer)
         {
-            Debug.Log("full rồi không làm gì cả");
             return;
         }
 
         UIQuiz.instance.OnFillText(currentSelectQuizz, idButton, letter);
+
         if (CheckLevelIsFinished())
         {
-            // StartCoroutine(GotoNextLevel());
+            AudioManager.instance.PlayRightSound();
             listGenerate[currentSelectQuizz].isCorrect = true;
             PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
-            Debug.Log("finish quest rồi");
             SHowMedal();
+            return;
         }
-      
+        if (CheckFullAnswer())
+        {
+            AudioManager.instance.PlayWrongSound();
+        }
+
     }
     public void OnCloseExplain()
     {
         if (CheckFinishRound1())
         {
-            string mes = "Chuc mung ban da thu thap dduowc du 8 huy hieu B-Nobel. Hayx tieep tuc chinh phuc thu thach tiep nao";
-            PopUpmanager.instance.InitFinishRound1(mes, NextRound);
+
+            AppControl.instance.round = 2;
+            QuizzPart2.instance.InitQuizz();
 
         }
     }
-    public void NextRound()
-    {
-        Debug.Log("net round");
-    }
     public void UnSetLetter(string letter, int idButton)
     {
+
         UIQuiz.instance.OnUnFillText(currentSelectQuizz, idButton, letter);
+    }
+
+    public GameObject panelButtonsAns;
+    public void UnserAnswer(int id)
+    {
+        for (int i = 0; i < panelButtonsAns.transform.childCount; i++)
+        {
+            ButtonPanelCtrl b = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>();
+            if (id == b.idButton)
+            {
+                b.ShowButton();
+            }
+        }
     }
 
     public bool CheckFinishRound1()
     {
-        for(int i =0;i<listGenerate.Count;i++)
+        for (int i = 0; i < listGenerate.Count; i++)
         {
-            if(listGenerate[i].isCorrect==false)
+            if (listGenerate[i].isCorrect == false)
             {
                 return false;
             }
@@ -241,13 +223,14 @@ public class QuizzDetail : MonoBehaviour
         {
             if (listGenerate[i].isCorrect == true)
             {
-                parentMedal.GetChild(i).gameObject.SetActive(true);
-            }else
+                parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(true);
+            }
+            else
             {
-                parentMedal.GetChild(i).gameObject.SetActive(false);
+                parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(false);
             }
         }
-     
+
     }
 
     bool CheckLevelIsFinished()
@@ -268,6 +251,7 @@ public class QuizzDetail : MonoBehaviour
                 else
                 {
                     rs = false;
+                    break;
                 }
 
 
@@ -277,20 +261,46 @@ public class QuizzDetail : MonoBehaviour
 
     }
 
-    public void SetNextIndex()
+    public bool CheckFullAnswer()
     {
-        bFullAnswer = false;
 
-        foreach (ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl)
+        bool rs = true;
+        QuizzItem q = UIQuiz.instance.listQuizzItem[currentSelectQuizz];
+        for (int i = 0; i < q.transform.childCount; i++)
         {
-            if (buttonLetterCtrl.text.text == "")
+            BoxWorld b = q.transform.GetChild(i).GetComponent<BoxWorld>();
+            if (b.idButton >= 0)
             {
-                currentIndex = buttonLetterCtrl.index;
-                return;
+
+                if (!string.IsNullOrEmpty(b.txtLableNomal.text))
+                {
+                    rs = true;
+                }
+                else
+                {
+                    rs = false;
+                    break;
+                }
             }
         }
-        bFullAnswer = true;
+        return rs;
+
     }
+
+    //public void SetNextIndex()
+    //{
+    //    bFullAnswer = false;
+
+    //    foreach (ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl)
+    //    {
+    //        if (buttonLetterCtrl.text.text == "")
+    //        {
+    //            currentIndex = buttonLetterCtrl.index;
+    //            return;
+    //        }
+    //    }
+    //    bFullAnswer = true;
+    //}
 
 
 }

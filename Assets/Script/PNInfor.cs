@@ -13,7 +13,7 @@ public class PNInfor : MonoBehaviour
     public InputField txtHotenAm;
     public GameObject RootRightAM, RightMoiBacsiDuocsi;
 
-    bool isBacsi = true;
+    public bool isDoctor = true;
     public GameObject BacSi, DuocSi;
     public InputField txtHotenBacsi, txtKhoa, txtBenhVien;
     public InputField txtHotenDuocsi, txtCodeNhathuoc, txtTenNhathuoc;
@@ -28,10 +28,20 @@ public class PNInfor : MonoBehaviour
         FillDropdown(drpTinhThanhDuocsi, Provices.instance.rootProvices.provices);
         LoadData();
     }
+    public void ResetData()
+    {
+        txtHotenBacsi.text = "";
+        txtKhoa.text = "";
+        txtBenhVien.text = "";
+        txtHotenDuocsi.text = "";
+        txtCodeNhathuoc.text = "";
+        txtTenNhathuoc.text = "";
+
+
+    }
     public void LoadData()
     {
-        // load data 
-        // txtHotenAm.text = AppControl.instance.listResult.trinhDuocVienName;
+     
         drpProvices.value = 1;
     }
  
@@ -70,8 +80,8 @@ public class PNInfor : MonoBehaviour
             PopUpmanager.instance.InitInfor("Check information",null);
             return;
         }
-        AppControl.instance.sentResult.trinhDuocVienName = txtHotenAm.text;
-        AppControl.instance.sentResult.tinhThanhTrinhDuocVien = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
+        AppControl.instance.data.device.owner = txtHotenAm.text;
+        AppControl.instance.data.device.branch = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
         RootRightAM.SetActive(false);
         RightMoiBacsiDuocsi.SetActive(true);
     }
@@ -88,14 +98,14 @@ public class PNInfor : MonoBehaviour
 
     public void OnBacSiClick()
     {
-        isBacsi = true;
+        isDoctor = true;
         BacSi.SetActive(true);
         DuocSi.SetActive(false);
         AudioManager.instance.PlayButtonClick();
     }
     public void OnDuocSiClick()
     {
-        isBacsi = false;
+        isDoctor = false;
         BacSi.SetActive(false);
         DuocSi.SetActive(true);
         AudioManager.instance.PlayButtonClick();
@@ -107,7 +117,7 @@ public class PNInfor : MonoBehaviour
     {
         AudioManager.instance.PlayButtonClick();
         // check thong tin khac null dax
-        if (isBacsi)
+        if (isDoctor)
         {
             if (CheckThongTinBacSi())
             {
@@ -123,10 +133,12 @@ public class PNInfor : MonoBehaviour
             }
 
         }
-       
-        AppControl.instance.sentResult.tinhThanhTrinhDuocVien = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
+
+        AppControl.instance.data.device.branch = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
+        AppControl.instance.gamestate = GameState.Start;
         UIQuiz.instance.OnShow(true);
         OnShow(false);
+     
     }
     public bool CheckThongTinBacSi()
     {
@@ -153,7 +165,7 @@ public class PNInfor : MonoBehaviour
     public void OnInforClick()
     {
         AudioManager.instance.PlayButtonClick();
-        txtNameChangeInfor.text = AppControl.instance.sentResult.trinhDuocVienName;
+        txtNameChangeInfor.text = AppControl.instance.data.device.owner;
         pnChangeInfor.SetActive(true);
     }
     public void OnChangeInforClick()

@@ -5,87 +5,99 @@ using System.Collections;
 //Controlador para las letras del panel
 public class ButtonPanelCtrl : MonoBehaviour
 {
-	Button button;
-	Image image;
-	public Text text;
-	public bool bHide;
+    Button button;
+    Image image;
+    public Text text;
+    public bool bHide;
     public int idButton;
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	void Awake()
-	{
-		button = GetComponent<Button>();
-		image = GetComponent<Image>();
-		text = transform.GetChild(0).GetComponent<Text>();
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	public void OnButtonPressed()
-	{
 
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void Awake()
+    {
+        button = GetComponent<Button>();
+        image = GetComponent<Image>();
+        text = transform.GetChild(0).GetComponent<Text>();
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+    public void OnButtonPressed()
+    {
         AudioManager.instance.PlayButtonClick();
-        if (!QuizzDetail.instance.bFullAnswer){
-            if(!bHide)
+
+        if (!bHide)
+        {
+            if (AppControl.instance.round == 1)
             {
+                if(QuizzDetail.instance.CheckFullAnswer())
+                {
+                    return;
+                }
                 HideButton();
                 StartCoroutine(SetLetter());
             }else
             {
-                ShowButton();
-                StartCoroutine(UnSetLetter());
-            }
-         
-            
-        }else
-        {
-            Debug.Log("Full answer");
-        }
-	}
-	
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public void HideButton()
-	{
-        // button.interactable = false;
-      
-         //      button.enabled = false;
-         //image.enabled = false;
-         //text.enabled = false;
-         bHide = true;
-	}
-   
+                HideButton();
+                StartCoroutine(SetLetter());
+            }
+              
+
+         
+        }
+        else
+        {
+            ShowButton();
+            StartCoroutine(UnSetLetter());
+        }
+
+
+
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void HideButton()
+    {
+        GetComponent<Image>().color = Color.grey;            
+        bHide = true;
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void ShowButton()
-	{
-		//button.enabled = true;
-		//image.enabled = true;
-		//text.enabled = true;
-		bHide = false;
-	}
+    {
+        GetComponent<Image>().color = Color.white;
+     //   edebeb
+        bHide = false;
+    }
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//Nos esperamos un frame para que el audio no suene con retraso
-	IEnumerator SetLetter()
-	{
-		yield return null;
-        QuizzDetail.instance.SetLetter(text.text, idButton);
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Nos esperamos un frame para que el audio no suene con retraso
+    IEnumerator SetLetter()
+    {
+        yield return null;
+        if (AppControl.instance.round == 1)
+            QuizzDetail.instance.SetLetter(text.text, idButton);
+        else
+            QuizzPart2.instance.SetLetter(text.text, idButton);
     }
     IEnumerator UnSetLetter()
     {
         yield return null;
-        QuizzDetail.instance.UnSetLetter(text.text, idButton);
+        if (AppControl.instance.round == 1)
+            QuizzDetail.instance.UnSetLetter(text.text, idButton);
+        else
+            QuizzPart2.instance.UnSetLetter(text.text, idButton);
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Volvemos a mostrar una letra del panel si el usuario la ha borrado de la respuesta
     public void SetLetterEnable()
-	{
-		//button.enabled = true;
-		//image.enabled = true;
-		//text.enabled = true;
-        bHide=false;
-	}
+    {
+        GetComponent<Image>().color = Color.white;
+
+        bHide = false;
+    }
 }

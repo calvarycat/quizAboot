@@ -10,6 +10,7 @@ public class UIQuiz : MonoBehaviour
     public GameObject PrefabsQuiz;
     public Transform RootQuiz; 
     public List<QuizzItem> listQuizzItem;
+   
 
     private void Awake()
     {
@@ -23,12 +24,25 @@ public class UIQuiz : MonoBehaviour
     public void OnShow(bool isShow)
     {
         Root.gameObject.SetActive(isShow);
-
+        // trộn mảng cho nó khác trước
+      
         OnQuestionClick(listQuiz[0], 0);
     }
 
+    public List<Quizz> MixedListQuizz(List<Quizz> input)
+    {
+        List<Quizz> rs = new List<Quizz>();
+        while (input.Count>0)
+        {
+            int ran = Random.Range(0, input.Count);
+            rs.Add(input[ran]);
+            input.RemoveAt(ran);
+        }
+        return rs;
+    }
     public void InitQuizUI()
     {
+        listQuiz = MixedListQuizz(listQuiz);
         listQuizzItem = new List<QuizzItem>();
         int quizzoder = 0;
         foreach (Quizz q in listQuiz)
@@ -85,18 +99,11 @@ public class UIQuiz : MonoBehaviour
             {
 
                 BoxWorld b = q.transform.GetChild(i).GetComponent<BoxWorld>();
-            
-                //if  (QuizzDetail.instance.listGenerate[currentQuiz].currentSelectItem == b.idButton)
-                //{
                 if(b.keyMaping==-1 && b.idButton>=0)
                 {
-               //     Debug.Log("no khong vo day luon");
                     b.OnMapingKey(keyAnsID, text);
                     return;
                 }
-                   
-                   
-               // }
             }
             QuizzDetail.instance.listGenerate[currentQuiz].currentSelectItem = QuizzDetail.instance.listGenerate[currentQuiz].currentSelectItem + 1;
         }
