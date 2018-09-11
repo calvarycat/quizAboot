@@ -223,13 +223,10 @@ public class PNInfor : MonoBehaviour
     }
     public void HideLoading()
     {
-        PopUpmanager.instance.InitInfor("Cập Nhật Thành Công", OnCloseCapNhat);
+        PopUpmanager.instance.InitInfor("Cập nhật dữ liệu thành công", "");
         PopUpmanager.instance.HideLoading();
     }
-    public void OnCloseCapNhat()
-    {
-
-    }
+   
     public void OnNo()
     {
 
