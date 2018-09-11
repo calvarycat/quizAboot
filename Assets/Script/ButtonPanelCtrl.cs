@@ -39,6 +39,10 @@ public class ButtonPanelCtrl : MonoBehaviour
             }else
             {
 
+                if (QuizzPart2.instance.CheckFullAnswer())
+                {
+                    return;
+                }
                 HideButton();
                 StartCoroutine(SetLetter());
             }

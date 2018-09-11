@@ -46,7 +46,7 @@ public class QuizzDetail : MonoBehaviour
         if (!listGenerate[idQuiz].isGenerate)
         {
             listGenerate[idQuiz].isGenerate = true;
-            Root.SetActive(true);          
+            Root.SetActive(true);
             Init();
         }
         else
@@ -90,6 +90,12 @@ public class QuizzDetail : MonoBehaviour
 
     public void ReSet()
     {
+        for (int i = 0; i < listGenerate.Count; i++)
+        {
+            listGenerate[i].isGenerate = false;
+            listGenerate[i].isCorrect = false;
+            listGenerate[i].isFullAnswer = false;
+        }
         nextIndex = 0;                                  //Vamos numerando las letras de la respuesta para poder rellenarlas despues
         bFullAnswer = false;                            //Se han rellenado todas las letras de la respuesta
                                                         //Indice de la letra siguiente a rellenar
@@ -166,6 +172,7 @@ public class QuizzDetail : MonoBehaviour
         {
             AudioManager.instance.PlayRightSound();
             listGenerate[currentSelectQuizz].isCorrect = true;
+
             PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
             SHowMedal();
             return;

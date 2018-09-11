@@ -26,36 +26,75 @@ public class AppControl : MonoBehaviour
 
     public void Awake()
     {
+       
+
         instance = this;
+        GetSave();
+
         round = 1;
         timeplay = 0;
+        GetOwner();
+    }
+
+
+    public void GetSave()
+    {
+        string value = "";
+        value= PlayerPrefs.GetString("datasave", "");
+        if(!string.IsNullOrEmpty(value))
+        {
+            data = JsonMapper.ToObject<DataSync>(value);
+        }
+        else
+        {
+            data = new DataSync();
+            GetOwner();
+        }
+     
 
     }
-    private void Start()
+    public void SaveData()
     {
-        // SendData();
+        string dt = JsonMapper.ToJson(data);
+        PlayerPrefs.SetString("datasave", dt);
     }
+
+  
 
     public void ResetData()
     {
         data.player = new List<UserInfo>();
+        SaveData();
     }
     public void StartNewSession()
-    {
-        Debug.Log("start new session");
+    {      
         usserSessionInfor = new UserInfo();
         panelInfor.ResetData();
-        round = 1;
+        panelInfor.OnShow(true);
+        UIQuiz.instance.OnShow(false);
+        QuizzDetail.instance.OnSHow(false);
+        QuizzPart2.instance.OnShow(false);
+       
+         round = 1;
         timeplay = 0;
 
     }
     public void SendData()
     {
-        GetOwner();
+      
         GetSave();
         GetUserPlay();
-        StartCoroutine(Upload());
+        PlayerPrefs.GetString("datasave", "");
+        StartCoroutine(Upload(OnSendFinish));
 
+    }
+    public void SynData( Action SendFinish)
+    {       
+            StartCoroutine(Upload(SendFinish));
+    }
+    public void OnSendFinish()
+    {
+        Debug.Log("send finish  app control");
     }
     public void GetOwner()
     {
@@ -65,39 +104,42 @@ public class AppControl : MonoBehaviour
         data.device.platform_name = SystemInfo.operatingSystem;
         data.device.uid = SystemInfo.deviceUniqueIdentifier;
     }
-    public void GetSave()
-    {
-
-    }
+ 
     public void GetUserPlay()
     {
 
         usserSessionInfor.isDoctor = panelInfor.isDoctor;
-
-
         usserSessionInfor.timeplay = 22;
         if (usserSessionInfor.isDoctor == true)
         {
             usserSessionInfor.fullname = panelInfor.txtHotenBacsi.text;
-            usserSessionInfor.hospital = "mat";
-            usserSessionInfor.major = "IT";
+            usserSessionInfor.hospital = panelInfor.txtBenhVien.text;
+            usserSessionInfor.major = panelInfor.txtKhoa.text;
+            usserSessionInfor.place = "";
+            usserSessionInfor.codeStore = "";
+            usserSessionInfor.storeName = "";
         }
         else
         {
             usserSessionInfor.fullname = panelInfor.txtHotenDuocsi.text;
+          
+            usserSessionInfor.codeStore = panelInfor.txtCodeNhathuoc.text;
+            usserSessionInfor.storeName = panelInfor.txtTenNhathuoc.text;
+            usserSessionInfor.place = Provices.instance.rootProvices.provices[panelInfor.drpTinhThanhDuocsi.value].TenTinhThanh;
 
         }
         usserSessionInfor.timeplay = timeplay;
+        usserSessionInfor.date = DateTime.Today.ToString() ;
         data.player.Add(usserSessionInfor);
-
     }
 
-    IEnumerator Upload()
+    IEnumerator Upload( Action Onfinish)
     {
         yield return new WaitForEndOfFrame();
-        BaseOnline.instance.SendData(data);
+        BaseOnline.instance.SendData(data, Onfinish);
         //string st = txtTest.text;
         yield return null;
+       
         // WWW w = new WWW(url,fo)
         //string rs = JsonMapper.ToJson(sentResult);
         ////  Debug.Log(rs);
@@ -142,17 +184,21 @@ public class AppControl : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            FinishApp();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    FinishApp();
+        //}
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             round = 1;
+            UIQuiz.instance.OnShow(false);
+            QuizzDetail.instance.OnSHow(false);
+            StartNewSession();
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             round = 2;
+            QuizzPart2.instance.InitQuizz();
         }
         if (gamestate == GameState.Start)
         {

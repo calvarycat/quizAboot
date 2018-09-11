@@ -18,14 +18,21 @@ public class UIQuiz : MonoBehaviour
     }
     void Start()
     {
-        InitQuizUI();
+        OnResert();
 
+    }
+    public void OnResert()
+    {
+        InitQuizUI();
+        QuizzDetail.instance.ReSet();
     }
     public void OnShow(bool isShow)
     {
-        Root.gameObject.SetActive(isShow);
-        // trộn mảng cho nó khác trước
-      
+        Root.gameObject.SetActive(isShow);   
+        if(isShow)
+        {
+            OnResert();
+        }
         OnQuestionClick(listQuiz[0], 0);
     }
 
@@ -45,6 +52,10 @@ public class UIQuiz : MonoBehaviour
         listQuiz = MixedListQuizz(listQuiz);
         listQuizzItem = new List<QuizzItem>();
         int quizzoder = 0;
+        foreach(Transform tran in RootQuiz)
+        {
+            Destroy(tran.gameObject);
+        }
         foreach (Quizz q in listQuiz)
         {
             GameObject obj = Instantiate(PrefabsQuiz, RootQuiz);
@@ -90,10 +101,8 @@ public class UIQuiz : MonoBehaviour
 
     public void OnFillText(int currentQuiz, int keyAnsID, string text)
     {
-
         if (listQuizzItem.Count > 0)
         {
-
             QuizzItem q = listQuizzItem[currentQuiz];
             for (int i = 0; i < q.transform.childCount - 1; i++)
             {
@@ -124,8 +133,9 @@ public class UIQuiz : MonoBehaviour
 
                 BoxWorld b = q.transform.GetChild(i).GetComponent<BoxWorld>();
                 if (keyAnsID == b.keyMaping)
-                {                   
-                    b.OnUnMapingKey(keyAnsID, text);
+                {
+                    //  b.OnUnMapingKey(keyAnsID, text);
+                    b.Unmapkey();
                 }
             }
         }

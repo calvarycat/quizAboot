@@ -27,6 +27,12 @@ public class PNInfor : MonoBehaviour
         FillDropdown(drpProvices, Provices.instance.rootProvices.provices);
         FillDropdown(drpTinhThanhDuocsi, Provices.instance.rootProvices.provices);
         LoadData();
+        if (!string.IsNullOrEmpty(AppControl.instance.data.device.owner))
+        {
+            txtHotenAm.text = AppControl.instance.data.device.owner;
+            //vo trang đăng nhập luôn
+            OnDangNhapAM();
+        }
     }
     public void ResetData()
     {
@@ -41,10 +47,10 @@ public class PNInfor : MonoBehaviour
     }
     public void LoadData()
     {
-     
-        drpProvices.value = 1;
+        int dropAM = PlayerPrefs.GetInt("dropAM", 1);
+        drpProvices.value = dropAM;
     }
- 
+
     public void OnShow(bool isShow)
     {
         root.SetActive(isShow);
@@ -62,13 +68,13 @@ public class PNInfor : MonoBehaviour
             dr.options.Add(new Dropdown.OptionData(str.TenTinhThanh));
 
         }
-        dr.captionText.text = "Select a region";
+        dr.captionText.text = "Tỉnh/Thành";
 
     }
     public void OnDropDownClick(int id)
     {
         idProvicesAM = id;
-     //   Debug.Log("Choose This ID" + id + Provices.instance.rootProvices.provices[id].TenTinhThanh);
+        //   Debug.Log("Choose This ID" + id + Provices.instance.rootProvices.provices[id].TenTinhThanh);
     }
 
 
@@ -77,13 +83,18 @@ public class PNInfor : MonoBehaviour
         AudioManager.instance.PlayButtonClick();
         if (CheckAMInfor())
         {
-            PopUpmanager.instance.InitInfor("Check information",null);
+            PopUpmanager.instance.InitInfor("Check information", null);
             return;
         }
         AppControl.instance.data.device.owner = txtHotenAm.text;
         AppControl.instance.data.device.branch = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
         RootRightAM.SetActive(false);
         RightMoiBacsiDuocsi.SetActive(true);
+        AppControl.instance.SaveData();
+
+
+        PlayerPrefs.SetInt("dropAM", idProvicesAM);
+
     }
     public bool CheckAMInfor()
     {
@@ -110,7 +121,7 @@ public class PNInfor : MonoBehaviour
         DuocSi.SetActive(true);
         AudioManager.instance.PlayButtonClick();
     }
-    
+
 
 
     public void OnDangNhapStartGame()
@@ -124,7 +135,8 @@ public class PNInfor : MonoBehaviour
                 PopUpmanager.instance.InitInfor("Check information", null);
                 return;
             }
-        }else
+        }
+        else
         {
             if (CheckThongtinDuocsi())
             {
@@ -137,12 +149,14 @@ public class PNInfor : MonoBehaviour
         AppControl.instance.data.device.branch = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
         AppControl.instance.gamestate = GameState.Start;
         UIQuiz.instance.OnShow(true);
+        QuizzDetail.instance.OnSHow(true);
+
         OnShow(false);
-     
+
     }
     public bool CheckThongTinBacSi()
     {
-        if (string.IsNullOrEmpty(txtHotenBacsi.text)|| string.IsNullOrEmpty(txtKhoa.text)|| string.IsNullOrEmpty(txtBenhVien.text))
+        if (string.IsNullOrEmpty(txtHotenBacsi.text) || string.IsNullOrEmpty(txtKhoa.text) || string.IsNullOrEmpty(txtBenhVien.text))
         {
             return true;
         }
@@ -150,7 +164,7 @@ public class PNInfor : MonoBehaviour
     }
     public bool CheckThongtinDuocsi()
     {
-        if (string.IsNullOrEmpty(txtHotenDuocsi.text)|| string.IsNullOrEmpty(txtCodeNhathuoc.text)|| string.IsNullOrEmpty(txtTenNhathuoc.text))
+        if (string.IsNullOrEmpty(txtHotenDuocsi.text) || string.IsNullOrEmpty(txtCodeNhathuoc.text) || string.IsNullOrEmpty(txtTenNhathuoc.text))
         {
             return true;
         }
@@ -165,8 +179,17 @@ public class PNInfor : MonoBehaviour
     public void OnInforClick()
     {
         AudioManager.instance.PlayButtonClick();
-        txtNameChangeInfor.text = AppControl.instance.data.device.owner;
-        pnChangeInfor.SetActive(true);
+        if (pnChangeInfor.gameObject.activeSelf)
+        {
+            pnChangeInfor.SetActive(false);
+
+        }
+        else
+        {
+            txtNameChangeInfor.text = AppControl.instance.data.device.owner;
+            pnChangeInfor.SetActive(true);
+        }
+
     }
     public void OnChangeInforClick()
     {
@@ -175,6 +198,39 @@ public class PNInfor : MonoBehaviour
         RightMoiBacsiDuocsi.SetActive(false);
     }
     public void OnSyndataClick()
+    {
+        AudioManager.instance.PlayButtonClick();
+        if (Application.internetReachability == NetworkReachability.NotReachable)
+        {
+            PopUpmanager.instance.InitInfor("Kiểm tra kết nối internet", null);
+            return;
+        }
+        if (AppControl.instance.data.player.Count > 0)
+        {
+            PopUpmanager.instance.InitConfirm("Hệ thống sẽ tiến hành cập nhật thông tin lên sever?", OnYes, null);
+        }
+        else
+        {
+            PopUpmanager.instance.InitInfor("Không có dữ liệu mới", null);
+        }
+
+    }
+    public void OnYes()
+    {
+        PopUpmanager.instance.ShowLoading();
+        AppControl.instance.SynData(HideLoading);
+
+    }
+    public void HideLoading()
+    {
+        PopUpmanager.instance.InitInfor("Cập Nhật Thành Công", OnCloseCapNhat);
+        PopUpmanager.instance.HideLoading();
+    }
+    public void OnCloseCapNhat()
+    {
+
+    }
+    public void OnNo()
     {
 
     }

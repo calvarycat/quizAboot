@@ -18,6 +18,11 @@ public class PopUpmanager : MonoBehaviour
     public Text txtContentRound1;
     public Action _OncloseRound1;
 
+    public GameObject RootConfirm;
+    public Text txtConfrimText;
+    public Action _OnYes;
+    public Action _OnNo;
+
     public void Awake()
     {
         if (!instance)
@@ -73,4 +78,41 @@ public class PopUpmanager : MonoBehaviour
         }
     }
 
+
+
+
+    public void InitConfirm(string mes, Action onYes,Action OnNo)
+    {
+        _OnYes = onYes;
+        _OnNo = OnNo;
+        txtConfrimText.text = mes;
+        RootConfirm.SetActive(true);
+
+    }
+    public void OnYes()
+    {
+        RootConfirm.SetActive(false);
+        if (_OnYes != null)
+        {
+            _OnYes();
+        }
+    }
+    public void OnNo()
+    {
+        RootConfirm.SetActive(false);
+        if (_OnNo != null)
+        {
+            _OnNo();
+        }
+    }
+
+    public GameObject rootLoading;
+    public void ShowLoading()
+    {
+        rootLoading.SetActive(true);
+    }
+    public void HideLoading()
+    {
+        rootLoading.SetActive(false);
+    }
 }

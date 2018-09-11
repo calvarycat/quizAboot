@@ -68,7 +68,7 @@ public class BoxWorld : MonoBehaviour
         rootHide.SetActive(false);
         RootHightLight.SetActive(false);
     }
-    bool _isSelect;
+   public bool _isSelect;
     public void SetSelect(bool isSelect)
     {
         _isSelect = isSelect;
@@ -76,6 +76,7 @@ public class BoxWorld : MonoBehaviour
     }
     public void OnClick()
     {
+        Debug.Log("On unclick" + _isSelect);
         if (_isSelect)
             OnUnMapKeyFromWordBox();
         else
@@ -90,8 +91,6 @@ public class BoxWorld : MonoBehaviour
     }
     void OnUnMapKeyFromWordBox()
     {
-        Debug.Log("OnUnMapKeyFromWordBox");
-
         if (AppControl.instance.round == 1)
             QuizzDetail.instance.UnserAnswer(keyMaping);
         else
@@ -117,7 +116,18 @@ public class BoxWorld : MonoBehaviour
             txtLableHightLight.text = text.ToUpper();
 
     }
-    public void OnUnMapingKey(int keyID, string text)
+    //public void OnUnMapingKey(int keyID, string text)
+    //{
+    //    keyMaping = -1;
+    //    if (txtLableNomal)
+    //        txtLableNomal.text = "";
+    //    if (txtLableRight)
+    //        txtLableRight.text = "";
+    //    if (txtLableHightLight)
+    //        txtLableHightLight.text = "";
+
+    //}
+    public void Unmapkey()
     {
         keyMaping = -1;
         if (txtLableNomal)
