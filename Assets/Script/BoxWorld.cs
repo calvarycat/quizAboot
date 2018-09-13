@@ -91,6 +91,7 @@ public class BoxWorld : MonoBehaviour
     }
     void OnUnMapKeyFromWordBox()
     {
+        Debug.Log(keyMaping);
         if (AppControl.instance.round == 1)
             QuizzDetail.instance.UnserAnswer(keyMaping);
         else

@@ -21,6 +21,8 @@ TextureImporter:
     21300028: Ui_14
     21300030: Ui_15
     21300032: Ui_16
+    21300034: Ui_17
+    21300036: Ui_18
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -348,6 +350,34 @@ TextureImporter:
         y: 609
         width: 358
         height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ui_17
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 497
+        width: 112
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Ui_18
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 363
+        width: 109
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

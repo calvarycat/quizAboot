@@ -20,7 +20,7 @@ public class PNInfor : MonoBehaviour
 
     public GameObject pnChangeInfor;
     public Text txtNameChangeInfor;
-
+    bool isClick;
     // Use this for initialization
     void Start()
     {
@@ -29,11 +29,14 @@ public class PNInfor : MonoBehaviour
         LoadData();
         if (!string.IsNullOrEmpty(AppControl.instance.data.device.owner))
         {
+            isClick = true;
             txtHotenAm.text = AppControl.instance.data.device.owner;
             //vo trang đăng nhập luôn
             OnDangNhapAM();
+           
         }
     }
+
     public void ResetData()
     {
         txtHotenBacsi.text = "";
@@ -80,7 +83,12 @@ public class PNInfor : MonoBehaviour
 
     public void OnDangNhapAM()
     {
-        AudioManager.instance.PlayButtonClick();
+        if(!isClick)
+        {
+           AudioManager.instance.PlayButtonClick();
+
+        }
+        isClick = false;
         if (CheckAMInfor())
         {
             PopUpmanager.instance.InitInfor("Check information", null);
@@ -197,6 +205,10 @@ public class PNInfor : MonoBehaviour
         RootRightAM.SetActive(true);
         RightMoiBacsiDuocsi.SetActive(false);
     }
+    public void OnCloseChangeInforClick()
+    {
+        pnChangeInfor.SetActive(false);
+    }
     public void OnSyndataClick()
     {
         AudioManager.instance.PlayButtonClick();
@@ -223,7 +235,7 @@ public class PNInfor : MonoBehaviour
     }
     public void HideLoading()
     {
-        PopUpmanager.instance.InitInfor("Cập nhật dữ liệu thành công", "");
+        PopUpmanager.instance.InitInfor("Cập nhật dữ liệu thành công", null);
         PopUpmanager.instance.HideLoading();
     }
    

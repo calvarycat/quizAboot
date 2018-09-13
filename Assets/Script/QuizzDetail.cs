@@ -168,6 +168,11 @@ public class QuizzDetail : MonoBehaviour
 
         UIQuiz.instance.OnFillText(currentSelectQuizz, idButton, letter);
 
+        Invoke("RunAfterSeconf", .2f);
+    }
+    public void RunAfterSeconf()
+    {
+       
         if (CheckLevelIsFinished())
         {
             AudioManager.instance.PlayRightSound();
@@ -183,6 +188,9 @@ public class QuizzDetail : MonoBehaviour
         }
 
     }
+
+
+
     public void OnCloseExplain()
     {
         if (CheckFinishRound1())
@@ -294,21 +302,7 @@ public class QuizzDetail : MonoBehaviour
 
     }
 
-    //public void SetNextIndex()
-    //{
-    //    bFullAnswer = false;
-
-    //    foreach (ButtonLetterCtrl buttonLetterCtrl in listButtonLetterCtrl)
-    //    {
-    //        if (buttonLetterCtrl.text.text == "")
-    //        {
-    //            currentIndex = buttonLetterCtrl.index;
-    //            return;
-    //        }
-    //    }
-    //    bFullAnswer = true;
-    //}
-
+   
 
 }
 [System.Serializable]

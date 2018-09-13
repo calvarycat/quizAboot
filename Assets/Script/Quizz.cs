@@ -6,6 +6,7 @@ public class Quizz  {
 
     public string keyword;
     public List<string> hints;
+    [TextArea(5, 5)]
     public string explain;
     public int startFrom;
     public int keyhightlight;
