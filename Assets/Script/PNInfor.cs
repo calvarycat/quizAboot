@@ -140,7 +140,7 @@ public class PNInfor : MonoBehaviour
         {
             if (CheckThongTinBacSi())
             {
-                PopUpmanager.instance.InitInfor("Check information", null);
+                PopUpmanager.instance.InitInfor("Vui lòng điền đầy đủ thông tin", null);
                 return;
             }
         }
@@ -148,7 +148,7 @@ public class PNInfor : MonoBehaviour
         {
             if (CheckThongtinDuocsi())
             {
-                PopUpmanager.instance.InitInfor("Check information", null);
+                PopUpmanager.instance.InitInfor("Vui lòng điền đầy đủ thông tin", null);
                 return;
             }
 
@@ -219,7 +219,9 @@ public class PNInfor : MonoBehaviour
         }
         if (AppControl.instance.data.player.Count > 0)
         {
-            PopUpmanager.instance.InitConfirm("Hệ thống sẽ tiến hành cập nhật thông tin lên sever?", OnYes, null);
+            PopUpmanager.instance.ShowLoading();
+            AppControl.instance.SynData(HideLoading);
+            // PopUpmanager.instance.InitConfirm("Hệ thống sẽ tiến hành cập nhật thông tin lên sever?", OnYes, null);
         }
         else
         {
@@ -227,12 +229,7 @@ public class PNInfor : MonoBehaviour
         }
 
     }
-    public void OnYes()
-    {
-        PopUpmanager.instance.ShowLoading();
-        AppControl.instance.SynData(HideLoading);
-
-    }
+   
     public void HideLoading()
     {
         PopUpmanager.instance.InitInfor("Cập nhật dữ liệu thành công", null);
