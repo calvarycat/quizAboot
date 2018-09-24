@@ -28,7 +28,7 @@ public class QuizzDetail : MonoBehaviour
     public GameObject buttonLetterAnswerPrefab;
     public GameObject buttonSpacePrefab;
     public Text txtHint;
-
+    public Transform parentMedal;
     public void Awake()
     {
         instance = this;
@@ -90,6 +90,7 @@ public class QuizzDetail : MonoBehaviour
 
     public void ReSet()
     {
+        ResetMedal();
         for (int i = 0; i < listGenerate.Count; i++)
         {
             listGenerate[i].isGenerate = false;
@@ -172,14 +173,15 @@ public class QuizzDetail : MonoBehaviour
     }
     public void RunAfterSeconf()
     {
-       
+
         if (CheckLevelIsFinished())
         {
             AudioManager.instance.PlayRightSound();
             listGenerate[currentSelectQuizz].isCorrect = true;
 
             PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
-            SHowMedal();
+           // SHowMedal();
+            SHowMedal(currentSelectQuizz);
             return;
         }
         if (CheckFullAnswer())
@@ -199,6 +201,10 @@ public class QuizzDetail : MonoBehaviour
             AppControl.instance.round = 2;
             QuizzPart2.instance.InitQuizz();
 
+        }
+        else
+        {
+            UIQuiz.instance.ChooseNextQuit();
         }
     }
     public void UnSetLetter(string letter, int idButton)
@@ -231,18 +237,26 @@ public class QuizzDetail : MonoBehaviour
         }
         return true;
     }
-    public Transform parentMedal;
-    public void SHowMedal()
+
+    public List<GameObject> listMedal;
+    public void ResetMedal()
     {
         for (int i = 0; i < listGenerate.Count; i++)
+        {          
+               parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(false);             
+        }
+    }
+
+    public void SHowMedal(int id)
+    {
+        Debug.Log("Show medal");
+        for (int i = 0; i < listGenerate.Count; i++)
         {
-            if (listGenerate[i].isCorrect == true)
+
+            if (id == i)
             {
-                parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(true);
-            }
-            else
-            {
-                parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(false);
+                listMedal[i].transform.GetChild(1).gameObject.SetActive(true);
+                listMedal[i].transform.SetAsLastSibling();
             }
         }
 
@@ -302,8 +316,29 @@ public class QuizzDetail : MonoBehaviour
 
     }
 
-   
+    public void OnHelpClick()
+    {
+        QuizzItem q = UIQuiz.instance.listQuizzItem[currentSelectQuizz];
+        for (int i = 0; i < panelButtonsAns.transform.childCount; i++)
+        {
 
+            string c = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().text.text;
+            if (q.quiz.keyword.Contains(c))
+            {
+
+                panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color = Color.yellow;
+            }
+
+        }
+
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OnHelpClick();
+        }
+    }
 }
 [System.Serializable]
 public class GenerateWrods

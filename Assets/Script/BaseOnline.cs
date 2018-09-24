@@ -44,7 +44,7 @@ public class BaseOnline : MonoBehaviour
                 //{
                 // //   srb.value = www.progress;
                 //}
-                Debug.Log(www.progress);
+          //      Debug.Log(www.progress);
                 yield return new WaitForSeconds(.1f);
             }
             else
@@ -60,7 +60,7 @@ public class BaseOnline : MonoBehaviour
         {
             try
             {
-                Debug.Log("data response : "+www.text);
+              //  Debug.Log("data response : "+www.text);
                 ServerMessage serverRes = JsonMapper.ToObject<ServerMessage>(www.text);
                 SendFinish();
                 if (serverRes.status.Contains("success"))

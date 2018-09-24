@@ -25,7 +25,7 @@ public class PNInfor : MonoBehaviour
     void Start()
     {
         FillDropdown(drpProvices, Provices.instance.rootProvices.provices);
-        FillDropdown(drpTinhThanhDuocsi, Provices.instance.rootProvices.provices);
+     //   FillDropdown(drpTinhThanhDuocsi, Provices.instance.rootProvices.provices);
         LoadData();
         if (!string.IsNullOrEmpty(AppControl.instance.data.device.owner))
         {

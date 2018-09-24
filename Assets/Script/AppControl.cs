@@ -125,7 +125,7 @@ public class AppControl : MonoBehaviour
           
             usserSessionInfor.codeStore = panelInfor.txtCodeNhathuoc.text;
             usserSessionInfor.storeName = panelInfor.txtTenNhathuoc.text;
-            usserSessionInfor.place = Provices.instance.rootProvices.provices[panelInfor.drpTinhThanhDuocsi.value].TenTinhThanh;
+          //  usserSessionInfor.place = Provices.instance.rootProvices.provices[panelInfor.drpTinhThanhDuocsi.value].TenTinhThanh;
 
         }
         usserSessionInfor.timeplay = timeplay;

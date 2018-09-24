@@ -69,9 +69,26 @@ public class UIQuiz : MonoBehaviour
     int curentselectqID = 0;
     public void OnQuestionClick(Quizz q, int quizid)
     {
+        if (QuizzDetail.instance.listGenerate[quizid].isCorrect)
+        {
+            Debug.Log("quiz hoan thanh");
+            return;          
+
+        }
         curentselectqID = quizid;
         QuizzDetail.instance.OnInitQuiz(q, quizid);
         SetSelectQuiz(quizid);
+    }
+    public void ChooseNextQuit()
+    {
+        for(int i=0;i< QuizzDetail.instance.listGenerate.Count;i++)
+        {
+            if(!QuizzDetail.instance.listGenerate[i].isCorrect)
+            {
+                OnQuestionClick(listQuiz[i], i);
+                break;
+            }
+        }
     }
     public void SetSelectQuiz(int id)
     {
