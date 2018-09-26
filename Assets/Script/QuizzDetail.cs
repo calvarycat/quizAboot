@@ -55,7 +55,7 @@ public class QuizzDetail : MonoBehaviour
             {
 
                 Button currentButton = panelButtons.transform.GetChild(i).GetComponent<Button>();
-                currentButton.transform.GetChild(0).GetComponent<Text>().text = listGenerate[currentSelectQuizz].charGen[i].ToString();
+                currentButton.transform.GetChild(1).GetComponent<Text>().text = listGenerate[currentSelectQuizz].charGen[i].ToString();
                 if (GetFillButton(i))
                 {
                     panelButtons.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().HideButton();
@@ -66,6 +66,11 @@ public class QuizzDetail : MonoBehaviour
                 }
             }
         }
+        for (int i = 0; i < totalLettersPanel; i++)
+        {
+            panelButtons.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().HideHint();
+        }
+
     }
     public bool GetFillButton(int idButton)
     {
@@ -133,7 +138,7 @@ public class QuizzDetail : MonoBehaviour
         for (int i = 0; i < cleanAnswer.Length; i++)
         {
             Button currentButton = panelButtons.transform.GetChild(positions[i]).GetComponent<Button>();
-            currentButton.transform.GetChild(0).GetComponent<Text>().text = cleanAnswer[i].ToString();
+            currentButton.transform.GetChild(1).GetComponent<Text>().text = cleanAnswer[i].ToString();
             listGenerate[currentSelectQuizz].charGen[positions[i]] = cleanAnswer[i].ToString();
         }
         int d = 0;
@@ -150,7 +155,7 @@ public class QuizzDetail : MonoBehaviour
 
 
             Button currentButton = panelButtons.transform.GetChild(positions[i]).GetComponent<Button>();
-            currentButton.transform.GetChild(0).GetComponent<Text>().text = letter.ToString();
+            currentButton.transform.GetChild(1).GetComponent<Text>().text = letter.ToString();
             listGenerate[currentSelectQuizz].charGen[positions[i]] = letter.ToString();
         }
         for (int i = 0; i < panelButtons.transform.childCount; i++)
@@ -180,7 +185,7 @@ public class QuizzDetail : MonoBehaviour
             listGenerate[currentSelectQuizz].isCorrect = true;
 
             PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
-           // SHowMedal();
+            // SHowMedal();
             SHowMedal(currentSelectQuizz);
             return;
         }
@@ -198,6 +203,7 @@ public class QuizzDetail : MonoBehaviour
         if (CheckFinishRound1())
         {
 
+            AudioManager.instance.PlayFinishRound1();
             AppControl.instance.round = 2;
             QuizzPart2.instance.InitQuizz();
 
@@ -242,8 +248,8 @@ public class QuizzDetail : MonoBehaviour
     public void ResetMedal()
     {
         for (int i = 0; i < listGenerate.Count; i++)
-        {          
-               parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(false);             
+        {
+            parentMedal.GetChild(i).GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -318,27 +324,74 @@ public class QuizzDetail : MonoBehaviour
 
     public void OnHelpClick()
     {
+        if(!CheckHint())
+        {
+            return;
+        }
+        CheckFillKey();
+    }
+    bool CheckHint()
+    {
+        bool isShowHint = false;
+        for (int i = 0; i < totalLettersPanel; i++)
+        {
+            if (panelButtons.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().HintRight.activeSelf)
+                return false;
+
+        }
+        return true;
+    }
+
+    public void CheckFillKey()
+    {
         QuizzItem q = UIQuiz.instance.listQuizzItem[currentSelectQuizz];
-        for (int i = 0; i < panelButtonsAns.transform.childCount; i++)
+        foreach (char t in q.quiz.keyword)
         {
 
-            string c = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().text.text;
-            if (q.quiz.keyword.Contains(c))
+            int countKey = CountKey(t.ToString()); // 1 ký tự
+            for (int i = 0; i < countKey; i++)
             {
-
-                panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color = Color.yellow;
+                FillKeyWord(t.ToString());
             }
 
         }
-
     }
-    private void Update()
+    public void FillKeyWord(string t)
     {
-        if (Input.GetKeyDown(KeyCode.H))
+        int d = 0;
+        for (int i = 0; i < panelButtonsAns.transform.childCount; i++)
         {
-            OnHelpClick();
+            string c = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().text.text;
+            if (t == c && (!panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().HintRight.activeSelf))
+            {
+                //if(panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color == Color.cyan)
+                //{
+                //    c.GetComponent<Image>().color = Color.cyan;
+                //}
+                //else
+                //{
+                //    panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color = Color.yellow;
+                //}
+                panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().ShowHint();
+                break;
+            }
         }
     }
+    public int CountKey(string t)
+    {
+        int d = 0;
+
+        QuizzItem q = UIQuiz.instance.listQuizzItem[currentSelectQuizz];
+        foreach (char at in q.quiz.keyword)
+        {
+            if (at.ToString() == t)
+            {
+                d++;
+            }
+        }
+        return d;
+    }
+
 }
 [System.Serializable]
 public class GenerateWrods

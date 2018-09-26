@@ -17,6 +17,7 @@ public class QuizzPart2 : MonoBehaviour
 
     private void Awake()
     {
+       
         instance = this;
         FillAnswer();
     }
@@ -37,11 +38,17 @@ public class QuizzPart2 : MonoBehaviour
         root.SetActive(true);
         pnCongratulation.gameObject.SetActive(true);
         pnGamePlay.gameObject.SetActive(false);
-        StartCoroutine(OpenGamePlay());
+      //  StartCoroutine(OpenGamePlay());
     }
     IEnumerator OpenGamePlay()
     {
         yield return new WaitForSeconds(5);
+        pnCongratulation.gameObject.SetActive(false);
+        pnGamePlay.gameObject.SetActive(true);
+    }
+    public void StartGame2()
+    {
+     
         pnCongratulation.gameObject.SetActive(false);
         pnGamePlay.gameObject.SetActive(true);
     }
@@ -101,7 +108,7 @@ public class QuizzPart2 : MonoBehaviour
         for (int i = 0; i < cleanAnswer.Length; i++)
         {
             Button currentButton = panelButtons.transform.GetChild(positions[i]).GetComponent<Button>();
-            currentButton.transform.GetChild(0).GetComponent<Text>().text = cleanAnswer[i].ToString();
+            currentButton.transform.GetChild(1).GetComponent<Text>().text = cleanAnswer[i].ToString();
         }
 
 
@@ -198,7 +205,7 @@ public class QuizzPart2 : MonoBehaviour
     public GameObject panelButtonsAns;
     public void UnserAnswer(int id)
     {
-        Debug.Log("Co unmap khong vay?");
+
         for (int i = 0; i < panelButtonsAns.transform.childCount; i++)
         {
             ButtonPanelCtrl b = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>();

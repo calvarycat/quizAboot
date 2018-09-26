@@ -76,7 +76,7 @@ public class BoxWorld : MonoBehaviour
     }
     public void OnClick()
     {
-        Debug.Log("On unclick" + _isSelect);
+
         if (_isSelect)
             OnUnMapKeyFromWordBox();
         else
@@ -91,7 +91,7 @@ public class BoxWorld : MonoBehaviour
     }
     void OnUnMapKeyFromWordBox()
     {
-        Debug.Log(keyMaping);
+
         if (AppControl.instance.round == 1)
             QuizzDetail.instance.UnserAnswer(keyMaping);
         else

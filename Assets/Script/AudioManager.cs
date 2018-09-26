@@ -7,7 +7,7 @@ public class AudioManager : MonoBehaviour {
     public static AudioManager instance;   
     public AudioSource audioSoundBackGround;
     public AudioSource audioSoundEffect;
-    public AudioClip clipRight, clipWrong,button,congratulation;
+    public AudioClip clipRight, clipWrong,button,congratulation,FinishRound1;
 
 
     public void Awake()
@@ -49,5 +49,9 @@ public class AudioManager : MonoBehaviour {
     public void PlayCongratulation()
     {
         audioSoundEffect.PlayOneShot(congratulation);
+    }
+    public void PlayFinishRound1()
+    {
+        audioSoundEffect.PlayOneShot(FinishRound1);
     }
 }

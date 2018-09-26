@@ -10,6 +10,8 @@ public class ButtonPanelCtrl : MonoBehaviour
     public Text text;
     public bool bHide;
     public int idButton;
+    public GameObject HintRight;
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,11 +19,11 @@ public class ButtonPanelCtrl : MonoBehaviour
     {
         button = GetComponent<Button>();
         image = GetComponent<Image>();
-        text = transform.GetChild(0).GetComponent<Text>();
+        text = transform.GetChild(1).GetComponent<Text>();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
+
     public void OnButtonPressed()
     {
         AudioManager.instance.PlayButtonClick();
@@ -30,13 +32,14 @@ public class ButtonPanelCtrl : MonoBehaviour
         {
             if (AppControl.instance.round == 1)
             {
-                if(QuizzDetail.instance.CheckFullAnswer())
+                if (QuizzDetail.instance.CheckFullAnswer())
                 {
                     return;
                 }
                 HideButton();
                 StartCoroutine(SetLetter());
-            }else
+            }
+            else
             {
 
                 if (QuizzPart2.instance.CheckFullAnswer())
@@ -46,9 +49,9 @@ public class ButtonPanelCtrl : MonoBehaviour
                 HideButton();
                 StartCoroutine(SetLetter());
             }
-              
 
-         
+
+
         }
         else
         {
@@ -64,7 +67,15 @@ public class ButtonPanelCtrl : MonoBehaviour
 
     public void HideButton()
     {
-        GetComponent<Image>().color = Color.grey;            
+        if (GetComponent<Image>().color == Color.yellow)
+        {
+            GetComponent<Image>().color = Color.cyan;
+        }
+        else
+        {
+            GetComponent<Image>().color = Color.grey;
+        }
+
         bHide = true;
     }
 
@@ -72,11 +83,30 @@ public class ButtonPanelCtrl : MonoBehaviour
 
     public void ShowButton()
     {
-        GetComponent<Image>().color = Color.white;
-     //   edebeb
+        if (GetComponent<Image>().color == Color.yellow || GetComponent<Image>().color == Color.cyan)
+        {
+            GetComponent<Image>().color = Color.yellow;
+        }
+        else
+        {
+
+            GetComponent<Image>().color = Color.white;
+        }
+
         bHide = false;
     }
 
+    public void ShowHint()
+    {
+
+        if (HintRight)
+            HintRight.SetActive(true);
+    }
+    public void HideHint()
+    {
+        if (HintRight)
+            HintRight.SetActive(false);
+    }
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Nos esperamos un frame para que el audio no suene con retraso
     IEnumerator SetLetter()
