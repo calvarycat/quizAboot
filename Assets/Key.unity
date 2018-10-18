@@ -901,11 +901,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 88e88c8522221cf4cb93aabbf32746f2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3292,9 +3292,9 @@ MonoBehaviour:
   listQuiz:
   - keyword: 15
     hints:
-    - "Ch\u1EC9 ...ph\xFAt sau khi u\u1ED1ng, piroxicam beta cyclodextrin nhanh ch\xF3ng
-      cho t\xE1c d\u1EE5ng gi\u1EA3m \u0111au. "
-    explain: "Ch\u1EC9 15 ph\xFAt sau khi u\u1ED1ng, piroxicam beta cyclodextrin nhanh
+    - "Ch\u1EC9 ...ph\xFAt sau khi u\u1ED1ng, Piroxicam-beta-cyclodextrin nhanh ch\xF3ng
+      cho t\xE1c d\u1EE5ng gi\u1EA3m \u0111au."
+    explain: "Ch\u1EC9 15 ph\xFAt sau khi u\u1ED1ng, Piroxicam-beta-cyclodextrin nhanh
       ch\xF3ng cho t\xE1c d\u1EE5ng gi\u1EA3m \u0111au.\r\n"
     startFrom: 5
     keyhightlight: 5
@@ -3311,37 +3311,38 @@ MonoBehaviour:
     keysetEnd: 11
   - keyword: DAUKHOP
     hints:
-    - "Piroxicam beta cyclodextrin \u0111i\u1EC1u tr\u1ECB c\xE1c ch\u1EE9ng \u2026 "
-    explain: "piroxicam beta cyclodextrin \u0111i\u1EC1u tr\u1ECB tri\u1EC7u ch\u1EE9ng\r\n"
+    - "Piroxicam-beta-cyclodextrin \u0111i\u1EC1u tr\u1ECB tri\u1EC7u ch\u1EE9ng \u2026"
+    explain: "piroxicam beta cyclodextrin \u0111i\u1EC1u tr\u1ECB tri\u1EC7u ch\u1EE9ng\r
+      \u0111au kh\u1EDBp.\n"
     startFrom: 1
     keyhightlight: 5
     keySetStart: 0
     keysetEnd: 8
   - keyword: 24GIO
     hints:
-    - "Piroxicam beta cyclodextrin cho hi\u1EC7u qu\u1EA3 gi\u1EA3m \u0111au su\u1ED1t
-      \u2026 "
-    explain: "Piroxicam beta cyclodextrin cho hi\u1EC7u qu\u1EA3 gi\u1EA3m \u0111au
-      su\u1ED1t 24h"
+    - "Piroxicam-beta-cyclodextrin cho hi\u1EC7u qu\u1EA3 gi\u1EA3m \u0111au su\u1ED1t
+      \u2026"
+    explain: "Piroxicam-beta-cyclodextrin cho hi\u1EC7u qu\u1EA3 gi\u1EA3m \u0111au
+      su\u1ED1t 24h."
     startFrom: 3
     keyhightlight: 5
     keySetStart: 2
     keysetEnd: 8
   - keyword: 'DANGTIEM '
     hints:
-    - "Piroxicam beta cyclodextrin gi\u1EA3m \u0111au t\u01B0\u01A1ng \u0111\u01B0\u01A1ng
-      \u2026 "
-    explain: "Piroxicam beta cyclodextrin gi\u1EA3m \u0111au t\u01B0\u01A1ng \u0111\u01B0\u01A1ng
-      d\u1EA1ng ti\xEAm"
+    - "Piroxicam-beta-cyclodextrin c\xF3 t\xE1c d\u1EE5ng gi\u1EA3m \u0111au t\u01B0\u01A1ng
+      \u0111\u01B0\u01A1ng \u2026"
+    explain: "Piroxicam-beta-cyclodextrin c\xF3 t\xE1c d\u1EE5ng gi\u1EA3m \u0111au
+      t\u01B0\u01A1ng \u0111\u01B0\u01A1ng d\u1EA1ng ti\xEAm."
     startFrom: 4
     keyhightlight: 5
     keySetStart: 3
     keysetEnd: 12
   - keyword: 'NOBEL '
     hints:
-    - "Piroxicam beta cyclodextrin \u0111\u01B0\u1EE3c b\xE0o ch\u1EBF nh\u1EDD \u1EE9ng
-      d\u1EE5ng c\xF4ng ngh\u1EC7 \u0111\u1EA1t gi\u1EA3i \u2026 "
-    explain: "Piroxicam beta cyclodextrin \u0111\u01B0\u1EE3c b\xE0o ch\u1EBF\nnh\u1EDD
+    - "Piroxicam-beta-cyclodextrin \u0111\u01B0\u1EE3c b\xE0o ch\u1EBF nh\u1EDD \u1EE9ng
+      d\u1EE5ng c\xF4ng ngh\u1EC7 \u0111\u1EA1t gi\u1EA3i \u2026"
+    explain: "Piroxicam-beta-cyclodextrin \u0111\u01B0\u1EE3c b\xE0o ch\u1EBF \nnh\u1EDD
       \u1EE9ng d\u1EE5ng c\xF4ng ngh\u1EC7 \u0111\u1EA1t gi\u1EA3i nobel"
     startFrom: 5
     keyhightlight: 5
@@ -3349,17 +3350,17 @@ MonoBehaviour:
     keysetEnd: 10
   - keyword: 'ITKICHUNG '
     hints:
-    - "Piroxicam beta cyclodextrin \u2026 d\u1EA1 d\xE0y. "
-    explain: "Piroxicam beta cyclodextrin \xEDt k\xEDch \u1EE9ng d\u1EA1 d\xE0y. "
+    - "Piroxicam-beta-cyclodextrin \u2026  d\u1EA1 d\xE0y."
+    explain: "Piroxicam-beta-cyclodextrin \xEDt k\xEDch \u1EE9ng d\u1EA1 d\xE0y."
     startFrom: 0
     keyhightlight: 5
     keySetStart: -1
     keysetEnd: 9
   - keyword: ITNGUYCO
     hints:
-    - "piroxicam beta cyclodextrin \u2026 g\xE2y bi\u1EBFn ch\u1EE9ng tim m\u1EA1ch. "
-    explain: "Piroxicam beta cyclodextrin \xEDt nguy c\u01A1 g\xE2y bi\u1EBFn ch\u1EE9ng
-      tim m\u1EA1ch.\r\n"
+    - "Piroxicam-beta-cyclodextrin \u2026 g\xE2y bi\u1EBFn ch\u1EE9ng tim m\u1EA1ch."
+    explain: "Piroxicam-beta-cyclodextrin \xEDt nguy c\u01A1 g\xE2y bi\u1EBFn ch\u1EE9ng
+      tim m\u1EA1ch.\n"
     startFrom: 0
     keyhightlight: 5
     keySetStart: -1
