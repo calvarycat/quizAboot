@@ -29,6 +29,7 @@ public class QuizzDetail : MonoBehaviour
     public GameObject buttonSpacePrefab;
     public Text txtHint;
     public Transform parentMedal;
+    public GameObject helpText;
     public void Awake()
     {
         instance = this;
@@ -37,6 +38,13 @@ public class QuizzDetail : MonoBehaviour
     public void OnSHow(bool isShow)
     {
         Root.SetActive(isShow);
+        if(isShow)
+        {
+            helpText.gameObject.SetActive(true);
+        }else
+        {
+            helpText.gameObject.SetActive(false);
+        }
     }
     public void OnInitQuiz(Quizz _quiz, int idQuiz)
     {
@@ -202,7 +210,7 @@ public class QuizzDetail : MonoBehaviour
     {
         if (CheckFinishRound1())
         {
-
+            OnSHow(false);
             AudioManager.instance.PlayFinishRound1();
             AppControl.instance.round = 2;
             QuizzPart2.instance.InitQuizz();

@@ -29,7 +29,7 @@ public class BaseOnline : MonoBehaviour
         bool haveData = false;
         float timeset = 0;
         data.device.token = "qQH7Vg6tpk";
-       Debug.Log("<color=blue>" +url +"</color> "+ JsonMapper.ToJson(data));
+      // Debug.Log("<color=blue>" +url +"</color> "+ JsonMapper.ToJson(data));
         byte[] dataSend = Encoding.UTF8.GetBytes(JsonMapper.ToJson(data));
         Dictionary<string, string> headers = new Dictionary<string, string>();
         headers.Add("Content-Type", "application/json");

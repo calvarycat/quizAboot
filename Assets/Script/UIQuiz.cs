@@ -10,7 +10,8 @@ public class UIQuiz : MonoBehaviour
     public GameObject PrefabsQuiz;
     public Transform RootQuiz; 
     public List<QuizzItem> listQuizzItem;
-   
+
+    public GameObject helpText;
 
     private void Awake()
     {
@@ -28,8 +29,18 @@ public class UIQuiz : MonoBehaviour
     }
     public void OnShow(bool isShow)
     {
-        Root.gameObject.SetActive(isShow);   
-        if(isShow)
+        Root.gameObject.SetActive(isShow);
+
+        if (isShow)
+        {
+            helpText.gameObject.SetActive(true);
+        }
+        else
+        {
+            helpText.gameObject.SetActive(false);
+        }
+
+        if (isShow)
         {
             OnResert();
         }

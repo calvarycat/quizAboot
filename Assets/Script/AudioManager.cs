@@ -40,11 +40,12 @@ public class AudioManager : MonoBehaviour {
     }
     public void PlayWrongSound()
     {
-        audioSoundEffect.PlayOneShot(clipWrong);
+        Handheld.Vibrate();
+        // audioSoundEffect.PlayOneShot(clipWrong);
     }
     public void PlayButtonClick()
     {
-        audioSoundEffect.PlayOneShot(button);
+       // audioSoundEffect.PlayOneShot(button);
     }
     public void PlayCongratulation()
     {
