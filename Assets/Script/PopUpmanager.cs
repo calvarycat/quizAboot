@@ -48,11 +48,27 @@ public class PopUpmanager : MonoBehaviour
     }
     public void InitExplain(string mes, Action onClose)
     {
+        timeOpen = 0;
         _OncloseExplain = onClose;
         txtcontentExplain.text = mes;
         rootExplain.SetActive(true);
 
     }
+    float timeOpen = 0;
+    public void Update()
+    {
+
+         timeOpen += Time.deltaTime;
+        if (timeOpen >= 4)
+        {
+            if (rootExplain.activeSelf)
+            {
+                OnCloseExplain();
+            }
+            
+        }
+    }
+
     public void OnCloseExplain()
     {
         rootExplain.SetActive(false);
