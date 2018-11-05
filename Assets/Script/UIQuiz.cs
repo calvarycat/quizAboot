@@ -90,6 +90,9 @@ public class UIQuiz : MonoBehaviour
         QuizzDetail.instance.OnInitQuiz(q, quizid);
         SetSelectQuiz(quizid);
     }
+
+
+
     public void ChooseNextQuit()
     {
         for(int i=0;i< QuizzDetail.instance.listGenerate.Count;i++)
@@ -122,7 +125,7 @@ public class UIQuiz : MonoBehaviour
                 {
                     listQuizzItem[i].transform.GetChild(j).GetComponent<BoxWorld>().SetSelect(false);
                 }
-
+                listQuizzItem[i].transform.GetChild(j).GetComponent<BoxWorld>().HideLastItem();
             }
         }
     }
@@ -136,9 +139,11 @@ public class UIQuiz : MonoBehaviour
             {
 
                 BoxWorld b = q.transform.GetChild(i).GetComponent<BoxWorld>();
-                if(b.keyMaping==-1 && b.idButton>=0)
+                b.HideLastItem();
+                if (b.keyMaping==-1 && b.idButton>=0)
                 {
                     b.OnMapingKey(keyAnsID, text);
+                    b.ShowLastItem();
                     return;
                 }
             }
@@ -160,10 +165,12 @@ public class UIQuiz : MonoBehaviour
             {
 
                 BoxWorld b = q.transform.GetChild(i).GetComponent<BoxWorld>();
+                b.HideLastItem();
                 if (keyAnsID == b.keyMaping)
                 {
-                    //  b.OnUnMapingKey(keyAnsID, text);
                     b.Unmapkey();
+                    b.ShowLastItem();
+
                 }
             }
         }

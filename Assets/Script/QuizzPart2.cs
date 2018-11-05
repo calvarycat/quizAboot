@@ -17,7 +17,7 @@ public class QuizzPart2 : MonoBehaviour
 
     private void Awake()
     {
-       
+
         instance = this;
         FillAnswer();
     }
@@ -38,19 +38,26 @@ public class QuizzPart2 : MonoBehaviour
         root.SetActive(true);
         pnCongratulation.gameObject.SetActive(true);
         pnGamePlay.gameObject.SetActive(false);
-      //  StartCoroutine(OpenGamePlay());
+         StartCoroutine(OpenGamePlay());
     }
     IEnumerator OpenGamePlay()
-    {
+    {   
         yield return new WaitForSeconds(5);
-        pnCongratulation.gameObject.SetActive(false);
-        pnGamePlay.gameObject.SetActive(true);
+        if (pnCongratulation.activeSelf)
+        {
+            pnCongratulation.gameObject.SetActive(false);
+            pnGamePlay.gameObject.SetActive(true);
+          
+        }
     }
     public void StartGame2()
     {
-     
-        pnCongratulation.gameObject.SetActive(false);
-        pnGamePlay.gameObject.SetActive(true);
+        if (pnCongratulation.activeSelf)
+        {
+            pnCongratulation.gameObject.SetActive(false);
+            pnGamePlay.gameObject.SetActive(true);
+        }
+
     }
     public void FillAnswer()
     {
@@ -63,7 +70,7 @@ public class QuizzPart2 : MonoBehaviour
     {
 
         bool rs = true;
-       
+
         for (int i = 0; i < ans.transform.childCount; i++)
         {
             BoxWorld b = ans.transform.GetChild(i).GetComponent<BoxWorld>();
@@ -92,6 +99,7 @@ public class QuizzPart2 : MonoBehaviour
             BoxWorld b = ans.transform.GetChild(i).GetComponent<BoxWorld>();
             b.Unmapkey();
             b._isSelect = true;
+            b.HideLastItem();
         }
     }
 
@@ -195,8 +203,10 @@ public class QuizzPart2 : MonoBehaviour
         {
 
             BoxWorld b = ans.transform.GetChild(i).GetComponent<BoxWorld>();
+            b.HideLastItem();
             if (idButton == b.keyMaping)
             {
+                b.ShowLastItem();
                 // b.OnUnMapingKey(idButton, letter);
                 b.Unmapkey();
             }
@@ -224,8 +234,10 @@ public class QuizzPart2 : MonoBehaviour
         for (int i = 0; i < ans.transform.childCount; i++) // vì ở đây không có dấu sao hàng cuối
         {
             BoxWorld b = ans.transform.GetChild(i).GetComponent<BoxWorld>();
+            b.HideLastItem();
             if (b.keyMaping == -1 && b.idButton >= 0)
             {
+                b.ShowLastItem();
                 b.OnMapingKey(idButton, letter);
                 return;
             }

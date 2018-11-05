@@ -13,6 +13,7 @@ public class BoxWorld : MonoBehaviour
     public GameObject RootHightLight;
     public GameObject RootSpecial;
     public GameObject SelectObject;
+    public GameObject rootLastItem;
     public Text txtLableNomal;
     public Text txtLableRight;
     public Text txtLableHightLight;
@@ -26,6 +27,8 @@ public class BoxWorld : MonoBehaviour
     public string rightAnser;
     public void Init(string lb, bool isHide, bool isstart, bool isHilight, Action<int> acGotoQuiz, int _id, int _idButton)
     {
+        if(rootLastItem)
+        rootLastItem.SetActive(false);
         id = _id;
         idButton = _idButton;
         SetActiveObject(false, false, false, false, false);
@@ -53,6 +56,16 @@ public class BoxWorld : MonoBehaviour
             }
             rightAnser = lb.ToUpper();
         }
+    }
+    public void ShowLastItem()
+    {
+        if(rootLastItem)
+        rootLastItem.SetActive(true);
+    }
+    public void HideLastItem()
+    {
+        if (rootLastItem)
+            rootLastItem.SetActive(false);
     }
     public void SetActiveObject(bool isSpecial, bool isHide, bool isOpen, bool isNotOpen, bool isHightlight)
     {
@@ -104,7 +117,7 @@ public class BoxWorld : MonoBehaviour
             txtLableRight.text = "";
         if (txtLableHightLight)
             txtLableHightLight.text = "";
-
+        HideLastItem();
     }
     public void OnMapingKey(int keyID, string text)
     {
@@ -115,19 +128,10 @@ public class BoxWorld : MonoBehaviour
             txtLableRight.text = text.ToUpper();
         if (txtLableHightLight)
             txtLableHightLight.text = text.ToUpper();
+        ShowLastItem();
 
     }
-    //public void OnUnMapingKey(int keyID, string text)
-    //{
-    //    keyMaping = -1;
-    //    if (txtLableNomal)
-    //        txtLableNomal.text = "";
-    //    if (txtLableRight)
-    //        txtLableRight.text = "";
-    //    if (txtLableHightLight)
-    //        txtLableHightLight.text = "";
-
-    //}
+   
     public void Unmapkey()
     {
         keyMaping = -1;
@@ -137,7 +141,7 @@ public class BoxWorld : MonoBehaviour
             txtLableRight.text = "";
         if (txtLableHightLight)
             txtLableHightLight.text = "";
-
+        ShowLastItem();
     }
 
     public bool CheckRightAnswer(string ans)
