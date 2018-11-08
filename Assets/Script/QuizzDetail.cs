@@ -372,14 +372,6 @@ public class QuizzDetail : MonoBehaviour
             string c = panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().text.text;
             if (t == c && (!panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().HintRight.activeSelf))
             {
-                //if(panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color == Color.cyan)
-                //{
-                //    c.GetComponent<Image>().color = Color.cyan;
-                //}
-                //else
-                //{
-                //    panelButtonsAns.transform.GetChild(i).GetComponent<Image>().color = Color.yellow;
-                //}
                 panelButtonsAns.transform.GetChild(i).GetComponent<ButtonPanelCtrl>().ShowHint();
                 break;
             }

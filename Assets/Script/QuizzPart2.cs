@@ -34,6 +34,7 @@ public class QuizzPart2 : MonoBehaviour
     public void InitQuizz()
     {
         Resert();
+      
         AppControl.instance.round = 2;
         root.SetActive(true);
         pnCongratulation.gameObject.SetActive(true);
@@ -45,6 +46,8 @@ public class QuizzPart2 : MonoBehaviour
         yield return new WaitForSeconds(5);
         if (pnCongratulation.activeSelf)
         {
+           
+            AudioManager.instance.PlaySoundGame2();
             pnCongratulation.gameObject.SetActive(false);
             pnGamePlay.gameObject.SetActive(true);
           
@@ -56,6 +59,7 @@ public class QuizzPart2 : MonoBehaviour
         {
             pnCongratulation.gameObject.SetActive(false);
             pnGamePlay.gameObject.SetActive(true);
+            AudioManager.instance.PlaySoundGame2();
         }
 
     }

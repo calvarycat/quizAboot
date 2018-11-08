@@ -2,25 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour {
+public class AudioManager : MonoBehaviour
+{
 
-    public static AudioManager instance;   
+    public static AudioManager instance;
     public AudioSource audioSoundBackGround;
     public AudioSource audioSoundEffect;
-    public AudioClip clipRight, clipWrong,button,congratulation,FinishRound1;
+    public AudioClip clipRight, clipWrong, button, congratulation, FinishRound1;
+    public AudioClip audioRound1, audioround2;
 
 
     public void Awake()
     {
         instance = this;
-
+    }
+    public void PlaySoundGame1()
+    {
+        audioSoundBackGround.clip = audioRound1;
+        audioSoundBackGround.Play();
+    }
+    public void PlaySoundGame2()
+    {
+        Debug.Log("No khong vo");
+        audioSoundBackGround.clip = audioround2;
+        audioSoundBackGround.Stop();
+        StartCoroutine(PlayAfterSecond());
+    }
+    public IEnumerator PlayAfterSecond()
+    {
+        yield return new WaitForSeconds(1f);
+        audioSoundBackGround.Play();
     }
     public void PlaySound(AudioClip clip)
     {
 
         audioSoundEffect.PlayOneShot(clip);
     }
-	public void StopBGSound()
+    public void StopBGSound()
     {
         audioSoundBackGround.Stop();
     }
@@ -45,7 +63,7 @@ public class AudioManager : MonoBehaviour {
     }
     public void PlayButtonClick()
     {
-       // audioSoundEffect.PlayOneShot(button);
+        // audioSoundEffect.PlayOneShot(button);
     }
     public void PlayCongratulation()
     {

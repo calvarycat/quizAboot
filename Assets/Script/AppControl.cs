@@ -67,7 +67,8 @@ public class AppControl : MonoBehaviour
         SaveData();
     }
     public void StartNewSession()
-    {      
+    {
+        AudioManager.instance.PlaySoundGame1();
         usserSessionInfor = new UserInfo();
         panelInfor.ResetData();
         panelInfor.OnShow(true);
