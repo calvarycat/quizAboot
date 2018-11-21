@@ -95,7 +95,7 @@ public class AppControl : MonoBehaviour
     }
     public void OnSendFinish()
     {
-        Debug.Log("send finish  app control");
+      //  Debug.Log("send finish  app control");
     }
     public void GetOwner()
     {
@@ -189,18 +189,18 @@ public class AppControl : MonoBehaviour
         //{
         //    FinishApp();
         //}
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            round = 1;
-            UIQuiz.instance.OnShow(false);
-            QuizzDetail.instance.OnSHow(false);
-            StartNewSession();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            round = 2;
-            QuizzPart2.instance.InitQuizz();
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    round = 1;
+        //    UIQuiz.instance.OnShow(false);
+        //    QuizzDetail.instance.OnSHow(false);
+        //    StartNewSession();
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    round = 2;
+        //    QuizzPart2.instance.InitQuizz();
+        //}
         if (gamestate == GameState.Start)
         {
             timeplay += Time.deltaTime;

@@ -65,7 +65,7 @@ public class BaseOnline : MonoBehaviour
                 SendFinish();
                 if (serverRes.status.Contains("success"))
                 {
-                    Debug.Log("send success");                  
+                 //   Debug.Log("send success");                  
                     AppControl.instance.ResetData(); // resert data player sau khi choi
                     // write vo log??
                     if (OnFinishSend != null)

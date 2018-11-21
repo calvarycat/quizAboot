@@ -82,7 +82,7 @@ public class UIQuiz : MonoBehaviour
     {
         if (QuizzDetail.instance.listGenerate[quizid].isCorrect)
         {
-            Debug.Log("quiz hoan thanh");
+       //     Debug.Log("quiz hoan thanh");
             return;          
 
         }

@@ -151,7 +151,11 @@ public class PNInfor : MonoBehaviour
                 PopUpmanager.instance.InitInfor("Vui lòng điền đầy đủ thông tin", null);
                 return;
             }
-
+            if(!CheckEightCharactor())
+            {
+                PopUpmanager.instance.InitInfor("Code nhà thuốc có 8 ký tự", null);
+                return;
+            }
         }
 
         AppControl.instance.data.device.branch = Provices.instance.rootProvices.provices[idProvicesAM].TenTinhThanh;
@@ -161,6 +165,12 @@ public class PNInfor : MonoBehaviour
 
         OnShow(false);
 
+    }
+    public bool CheckEightCharactor()
+    {
+        if (txtCodeNhathuoc.text.Length == 8)
+            return true;
+        return false;
     }
     public bool CheckThongTinBacSi()
     {

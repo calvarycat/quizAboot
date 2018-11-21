@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
     }
     public void PlaySoundGame2()
     {
-        Debug.Log("No khong vo");
+
         audioSoundBackGround.clip = audioround2;
         audioSoundBackGround.Stop();
         StartCoroutine(PlayAfterSecond());

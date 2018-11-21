@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,10 +39,11 @@ public class QuizzDetail : MonoBehaviour
     public void OnSHow(bool isShow)
     {
         Root.SetActive(isShow);
-        if(isShow)
+        if (isShow)
         {
             helpText.gameObject.SetActive(true);
-        }else
+        }
+        else
         {
             helpText.gameObject.SetActive(false);
         }
@@ -193,7 +195,6 @@ public class QuizzDetail : MonoBehaviour
             listGenerate[currentSelectQuizz].isCorrect = true;
 
             PopUpmanager.instance.InitExplain(quizz.explain, OnCloseExplain);
-            // SHowMedal();
             SHowMedal(currentSelectQuizz);
             return;
         }
@@ -211,7 +212,9 @@ public class QuizzDetail : MonoBehaviour
         if (CheckFinishRound1())
         {
             OnSHow(false);
+            AudioManager.instance.audioSoundBackGround.Stop();
             AudioManager.instance.PlayFinishRound1();
+
             AppControl.instance.round = 2;
             QuizzPart2.instance.InitQuizz();
 
@@ -263,7 +266,6 @@ public class QuizzDetail : MonoBehaviour
 
     public void SHowMedal(int id)
     {
-        Debug.Log("Show medal");
         for (int i = 0; i < listGenerate.Count; i++)
         {
 
@@ -332,7 +334,7 @@ public class QuizzDetail : MonoBehaviour
 
     public void OnHelpClick()
     {
-        if(!CheckHint())
+        if (!CheckHint())
         {
             return;
         }
@@ -350,17 +352,18 @@ public class QuizzDetail : MonoBehaviour
         return true;
     }
 
+
     public void CheckFillKey()
     {
         QuizzItem q = UIQuiz.instance.listQuizzItem[currentSelectQuizz];
+
         foreach (char t in q.quiz.keyword)
         {
-
-            int countKey = CountKey(t.ToString()); // 1 ký tự
-            for (int i = 0; i < countKey; i++)
-            {
-                FillKeyWord(t.ToString());
-            }
+            //int countKey = CountKey(t.ToString()); // 1 ký tự
+            //for (int i = 0; i < countKey; i++)
+            //{
+            FillKeyWord(t.ToString());
+            //  }
 
         }
     }

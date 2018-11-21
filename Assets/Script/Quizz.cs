@@ -8,7 +8,7 @@ public class Quizz  {
     public List<string> hints;
     [TextArea(5, 5)]
     public string explain;
-    public int startFrom;
+      public int startFrom;
     public int keyhightlight;
     public int keySetStart=-1;
     public int keysetEnd=-1;

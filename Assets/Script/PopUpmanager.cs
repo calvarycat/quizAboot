@@ -11,7 +11,7 @@ public class PopUpmanager : MonoBehaviour
     public Action _OnCloseInfor;
 
     public GameObject rootExplain;
-    public Text txtcontentExplain;
+    public Text txtcontentExplain, txtUnderline;
     public Action _OncloseExplain;
 
     public GameObject RootFinishRound1;
@@ -51,27 +51,30 @@ public class PopUpmanager : MonoBehaviour
         timeOpen = 0;
         _OncloseExplain = onClose;
         txtcontentExplain.text = mes;
+
         rootExplain.SetActive(true);
+
 
     }
     float timeOpen = 0;
     public void Update()
     {
 
-         timeOpen += Time.deltaTime;
+        timeOpen += Time.deltaTime;
         if (timeOpen >= 4)
         {
             if (rootExplain.activeSelf)
             {
                 OnCloseExplain();
             }
-            
+
         }
     }
 
     public void OnCloseExplain()
     {
         rootExplain.SetActive(false);
+
         if (_OncloseExplain != null)
         {
             _OncloseExplain();
@@ -97,7 +100,7 @@ public class PopUpmanager : MonoBehaviour
 
 
 
-    public void InitConfirm(string mes, Action onYes,Action OnNo)
+    public void InitConfirm(string mes, Action onYes, Action OnNo)
     {
         _OnYes = onYes;
         _OnNo = OnNo;
